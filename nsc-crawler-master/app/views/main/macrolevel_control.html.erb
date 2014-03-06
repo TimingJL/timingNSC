@@ -1,0 +1,99 @@
+<%= render :partial => 'main/header'%>
+<%= render :partial => 'main/task_log_modal'%>
+<div class="container">
+  <div class="well">
+    <h2>管理宏觀</h2>
+    <p>宏觀文章總數：<span class="badge badge-info"><%= @article_count %></span></p>
+    <hr>
+    <% if !@has_lock %>
+      <a id="grab_all" class="btn btn-large btn-primary" href="#">更新所有宏觀文章(費時)</a>
+    <% else %>
+      <a class="btn btn-large btn-primary disabled" href="#">更新中請稍待...</a>
+    <% end %>
+  </div>
+	<table class="table table-bordered">
+		<thead>
+    		<tr>
+      			<th>關鍵字</th>
+      			<th>文章數量</th>
+            <th>最新文章</th>
+      			<th class="span1"></th>
+    		</tr>
+  		</thead>
+ 		<tbody>
+ 			<% @macrolevels.each do |macrolevel| %>
+    		<tr>
+          <% if !macrolevel.lock %>
+      			<td><a href="<%= category_list_path(:category_type => macrolevel.class.name, :category_id => macrolevel.id) %>" 
+                    ><%= macrolevel.name %></a></td>
+      			<td><span class="badge badge-info"><%= macrolevel.articles.length %></span></td>
+            <td><%= article_entry(macrolevel.articles.order('authorize_at DESC').first) if macrolevel.articles.length > 0 %></td>
+      			<td>
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                  操作
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%= category_list_path(:category_type => macrolevel.class.name, :category_id => macrolevel.id) %>" 
+                    >瀏覽本類別</a></li>
+                  <li class="divider"></li>
+                  <li><a class="disabled_after_submit" href="<%= main_grab_by_macrolevel_path(:id => macrolevel.id, :grab_mode => 'UPDATE') %>" 
+                    >更新最新</a></li>
+                  <li><a class="disabled_after_submit" href="<%= main_grab_by_macrolevel_path(:id => macrolevel.id, :grab_mode => 'ALL') %>" 
+                    >更新所有</a></li>
+                  <li class="divider"></li>
+                  <li><a class="logModal-btn" href="#"
+                    data-category-id="<%= macrolevel.id %>" data-category-type="<%= macrolevel.class.name %>" 
+                    data-category-type-name="關鍵字" data-category-name="<%= macrolevel.name %>" 
+                    >更新記錄</a></li>
+                </ul>
+              </div>
+            </td>
+          <% else %>
+            <td><%= macrolevel.name %></td>
+            <td><span class="badge badge-warning"><%= macrolevel.articles.length %></span></td>
+            <td><span class="label label-warning">運算中</span></td>
+            <td><span class="label label-warning">運算中</span></td>
+          <% end %>
+    		</tr>
+    		<% end %>
+		</tbody>
+	</table>
+</div>
+
+<script src="http://bootboxjs.com/bootbox.js"></script>
+<script>
+  var macrolevel_total_length = <%= @macrolevels.length %>;
+  var counter = 0;
+
+  var redirect_path = "<%= macrolevel_control_path %>";
+  var request_path = "<%= main_grab_by_macrolevel_path %>";
+
+  function recursive_request(){
+    $.get(request_path + '?id=' + (counter+1) + '&request_type=ajax&grab_mode=UPDATE', function(data) {
+      if(data.status == 'ok') {
+        counter++;
+        if(macrolevel_total_length == counter)
+          window.location.href = redirect_path;
+        else
+          recursive_request();
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    $('#grab_all').click(function(e) {
+      e.preventDefault();
+      var self = this;
+      bootbox.confirm("是否更新所有宏觀文章？", function(result) {
+        if(result) {
+          $(self).append(' (Please wait...)');
+          $(self).addClass('disabled');
+          $(self).click(false);
+          recursive_request();
+        }
+      });
+    });
+  });
+</script>

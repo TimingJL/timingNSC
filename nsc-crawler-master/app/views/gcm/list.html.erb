@@ -1,0 +1,44 @@
+<%= render :partial => 'main/header'%>
+
+<div class="container">
+	<table class="table table-bordered">
+
+		<thead>
+    		<tr>
+      			<th>裝置ID</th>
+      			<th class="span3">email</th>
+      			<th class="span3"></th>
+    		</tr>
+  		</thead>
+ 		<tbody>
+ 			<% @devices.each do |device| %>
+				<tr>
+					<td><p><%= device.registration_id %></p></td>
+					<td><%= device.email %></td>
+					<td>
+						<a href="<%= gcm_delete_path(:registration_id => device.registration_id) %>" class="btn btn-danger">刪除裝置</a>
+		    		</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<div class="well">
+		<h3>說明</h3>
+		<hr>
+		<div>
+			<h4>裝置註冊</h4>
+			<p>HTTP POST</p>
+			<p>url: http://nccu.twbbs.org/gcm/reg</p>
+			<p>params: { email: "device_email", registration_id: "device_registration_id"}</p>
+			<h4>訊息推送</h4>
+			<p>HTTP POST</p>
+			<p>url: http://nccu.twbbs.org/gcm/push</p>
+			<p>params: { data: "test message"}</p>
+			<p>會推送訊息至已在列表上的裝置</p>
+		</div>
+		<hr>
+		<a href="<%= gcm_clear_path %>" class="btn btn-large btn-danger">清空裝置列表</a>
+		<a href="<%= gcm_push_path(:data => 'test message' ) %>" class="btn btn-large btn-info">發送測試訊息</a>
+	<div>
+</div>

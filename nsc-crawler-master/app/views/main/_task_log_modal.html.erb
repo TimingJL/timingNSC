@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div id="logModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="logModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="logModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('.logModal-btn').click(function(e) {
+    e.preventDefault();
+    var self = this;
+    var request_path = '<%= category_task_log_path %>'
+
+    $('#logModalLabel').html($(self).attr('data-category-type-name') + '-' + $(self).attr('data-category-name') + ':更新記錄');
+    $('#logModal .modal-body').html('Loading...');
+    $('#logModal').modal('show');
+
+    $.get(request_path + '?category_type=' + $(self).attr('data-category-type') + '&category_id=' + $(self).attr('data-category-id'), function(data) {
+      $('#logModal .modal-body').html(data);
+    });
+  });
+})
+</script>

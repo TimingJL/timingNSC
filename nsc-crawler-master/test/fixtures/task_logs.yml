@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  duration: MyString
+  category_type: MyString
+  category_id: 1
+
+two:
+  duration: MyString
+  category_type: MyString
+  category_id: 1

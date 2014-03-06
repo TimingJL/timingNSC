@@ -1,0 +1,32 @@
+<%= render :partial => 'main/header'%>
+<div class="container">
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  <div class="hero-unit">
+    <h2>創新行動商務科技之跨領域整合型研究計劃 - I/O System</h2>
+    <dl>
+  	  <dt>系統平台</dt>
+  	  <dd>Ruby on Rails / MySQL / Delayed_job</dd>
+  	</dl>
+    <dl>
+  	  <dt>支援來源</dt>
+  	  <dd>鉅亨網，知識贏家</dd>
+  	</dl>
+    <dl>
+	  <dt>
+<!--
+        關鍵字總數：<span class="badge badge-info"><%= Keyword.count %></span> /
+	      宏觀分類：<span class="badge badge-info"><%= Macrolevel.count %></span> /
+-->
+	      文章總數：<span class="badge badge-info"><%= Article.count %></span></dt>
+	  </dl>
+    <dl>
+      <dt><a href="https://github.com/LeeChSien/nsc-crawler" target="_blank"><i class="fa fa-github fa-6"></i> Source Code</a></dt>
+      <dd></dd>
+    </dl>
+  </div>
+  
+  <div class="hero-unit">
+    <h3>Database ER Diagram</h3>
+    <img class="img-polaroid" src="/resource/erd.jpg"/>
+  </div>
+</div>

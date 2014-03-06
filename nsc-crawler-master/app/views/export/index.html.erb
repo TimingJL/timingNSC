@@ -1,0 +1,66 @@
+<%= render :partial => 'main/header'%>
+<div class="container">
+<!--
+	<div class="well">
+		<legend>依照關鍵字索取新聞</legend>
+		<%= simple_form_for(ExportLog.new, :url => export_category_path, :validate => true, :html => {:class => 'form-horizontal'}) do |f| %>
+			<%= f.input_field :category_type, :value => 'Keyword', :style => 'display: none;'%>
+			<%= f.input :category_id, :label => '關鍵字', :collection => Keyword.all, :prompt => '請選擇...'%>
+			<%= f.input :name, :label => '申請人姓名' %>
+			<%= f.input :email, :label => '申請人e-mail' %>
+			<div class="control-group">
+				<div class="controls">
+					<%= f.button :submit, '申請', :class => 'btn-primary' %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+-->
+	<div class="well">
+		<legend>依照關鍵字索取新聞 </legend>
+		<div class="row">
+		<%= simple_form_for(ExportLogKeyword.new, :url => export_keyword_path, :validate => true, :html => {:class => 'form-horizontal pull-left'}) do |f| %>
+			<%= f.input_field :category_type, :value => 'Keyword', :style => 'display: none;'%>
+			<%= f.input :keyword, :label => '關鍵字' %>
+			<%= f.input :source, :label => '新聞來源', :collection => ['cnyes.com'], :default => 'cnyes.com'%>
+			<%= f.input :name, :label => '申請人姓名' %>
+			<%= f.input :email, :label => '申請人e-mail' %>
+			<div class="control-group">
+				<div class="controls">
+					<%= f.button :submit, '申請', :class => 'btn-primary' %>
+				</div>
+			</div>
+		<% end %>
+		<a href="http://lucene.apache.org/solr/" target="_blank" class="pull-right"><img src="/resource/img/solr-logo.png" class="span2"/></a>
+		</div>
+
+	</div>
+
+	<div class="well">
+		<legend>依照分類索取新聞</legend>
+		<%= simple_form_for(ExportLog.new, :url => export_category_path, :validate => true, :html => {:class => 'form-horizontal'}) do |f| %>
+			<%= f.input_field :category_type, :value => 'Macrolevel', :style => 'display: none;'%>
+			<%= f.input :category_id, :label => '鉅亨網分類', :collection => Macrolevel.all, :default => Macrolevel.first %>
+			<%= f.input :name, :label => '申請人姓名' %>
+			<%= f.input :email, :label => '申請人e-mail' %>
+			<div class="control-group">
+				<div class="controls">
+					<%= f.button :submit, '申請', :class => 'btn-primary' %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+
+	<div class="well">
+		<legend>索取所有新聞</legend>
+		<%= simple_form_for(ExportLog.new, :url => export_all_path, :validate => true, :html => {:class => 'form-horizontal'}) do |f| %>
+			<%= f.input :name, :label => '申請人姓名' %>
+			<%= f.input :email, :label => '申請人e-mail' %>
+			<div class="control-group">
+				<div class="controls">
+					<%= f.button :submit, '申請', :class => 'btn-primary' %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

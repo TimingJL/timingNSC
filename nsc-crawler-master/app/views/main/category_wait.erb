@@ -1,0 +1,29 @@
+<%= render :partial => 'main/header'%>
+
+<div class="container">
+	<%= flash_info(flash[:notice]) if flash[:notice] %>
+	<%= render :partial => "loader" %>
+</div>
+
+<script>
+	var query_path = "<%= category_wait_query_path(:category_type => @category.class.name, :category_id => @category.id).html_safe %>",
+		redirect_path = "<%= category_list_path(:category_type => @category.class.name, :category_id => @category.id).html_safe %>";
+
+	function recursive_polliing(){
+		$.get(query_path, function(data) {
+			if(data.lock) {
+				window.setTimeout(function() {
+					recursive_polliing();
+				}, 5000);
+			} else {
+				window.location.href = redirect_path;
+			}
+		});
+	}
+
+	$(document).ready(function(){
+		window.setTimeout(function() {
+			recursive_polliing();
+		}, 5000);
+	});
+</script>

@@ -1,0 +1,21 @@
+<%= render :partial => 'main/header'%>
+<div class="container">
+  <h2><%= @category.name %></h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>標題</th>
+        <th class="span3">時間</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article_entry(article) %></td>
+          <td><%= article.authorize_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+</div>

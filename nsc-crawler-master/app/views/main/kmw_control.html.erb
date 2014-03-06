@@ -1,0 +1,22 @@
+<%= render :partial => 'main/header'%>
+<div class="container">
+  <div class="well">
+    <h2>管理知識贏家</h2>
+    <hr>
+    <p>知識贏家總數：<span class="badge badge-info"><%= @articles_count %></span></p>
+  </div>
+	<table class="table table-bordered">
+		<thead>
+    		<tr>
+      			<th>失敗連結</th>
+    		</tr>
+  		</thead>
+ 		<tbody>
+ 			<% @fail_kmw_prelink_list.each do |fail_kmw_prelink| %>
+    		<tr>
+          <td><%= fail_kmw_prelink.url %></td>
+    		</tr>
+    	<% end %>
+		</tbody>
+	</table>
+</div>

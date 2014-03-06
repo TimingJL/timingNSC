@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  email: MyString
+  request_type: MyString
+  category_type: MyString
+  category_id: MyString
+  file_path: MyString
+
+two:
+  name: MyString
+  email: MyString
+  request_type: MyString
+  category_type: MyString
+  category_id: MyString
+  file_path: MyString

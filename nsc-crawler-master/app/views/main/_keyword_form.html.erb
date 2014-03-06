@@ -1,0 +1,30 @@
+<%= simple_form_for(:option, :url => main_grab_by_keyword_path, :html => {:class => 'form-inline', :onsubmit => "return validate_keyword_form()", :id => 'keyword_form'}) do |f| %>
+	<%= f.input_field :keyword, :class => "input-small", :placeholder => "標籤關鍵字"%>
+	<%= f.input_field :grab_mode, :collection => ['UPDATE', 'ALL'], :prompt => '抓取模式', :class => "input-small" %>
+	<button type="submit" class="btn btn-primary">觸發更新資料工作</button>
+<% end %>
+
+<script>
+function validate_keyword_form(){
+	if($('#option_keyword').val() && $('#option_grab_mode').val()){
+		$('#keyword_form button').addClass('disabled');
+		$('#keyword_form button').click(false);
+		return true;
+	}	
+	else
+		return false;
+}
+function auto_submit_keyword_form(keyword, grab_mode){
+	$('#option_keyword').val(keyword);
+	$('#option_grab_mode').val(grab_mode);
+	$('#keyword_form').submit();
+}
+
+$(document).ready(function () {
+	$('.keyword_submit_link').click(function (e){
+		e.preventDefault();
+		$(this).attr('data-name');
+		auto_submit_keyword_form($(this).attr('data-name'), $(this).attr('data-mode'));
+	});
+});
+</script>

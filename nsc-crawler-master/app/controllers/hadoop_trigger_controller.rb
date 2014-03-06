@@ -1,0 +1,2 @@
+class HadoopTriggerController < ApplicationController
+end

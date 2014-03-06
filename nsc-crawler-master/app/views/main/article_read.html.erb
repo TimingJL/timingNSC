@@ -1,0 +1,9 @@
+<%= render :partial => 'main/header'%>
+<div class="container">
+  <div><button class="btn" onClick="javascript:history.back(1)">回上頁</button><br><br></div>
+  <div class="hero-unit">
+    <h2><%= @article.title %></h2>
+    <p><%= simple_format(@article.content) %><p>
+  </div>
+  <div><button class="btn" onClick="javascript:history.back(1)">回上頁</button><br><br></div>
+</div>

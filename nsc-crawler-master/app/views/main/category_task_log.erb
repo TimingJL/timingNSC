@@ -1,0 +1,16 @@
+<table class="table table-bordered">
+	<thead>
+  		<tr>
+    			<th>更新時間點</th>
+    			<th>耗時(秒)</th>
+  		</tr>
+		</thead>
+		<tbody>
+			<% @category.task_logs.each do |task_log| %>
+  		<tr>
+          <td><%= task_log.created_at %></td>
+          <td><%= task_log.duration %></td>
+  		</tr>
+  	<% end %>
+	</tbody>
+</table>

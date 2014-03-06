@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>創新行動商務科技之跨領域整合型研究計劃 - I/O System</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <style>
+  	body{
+  	  background: url('/resource/img/tree_bark.png');
+  	}
+
+    @media (min-width: 979px) {
+      body{
+        padding-top: 70px;
+      } 
+    }
+
+    .well, .hero-unit, table{
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+  </style>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

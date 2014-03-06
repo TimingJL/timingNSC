@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  keyword: MyString
+  source: MyString
+  name: MyString
+  email: MyString
+  request_type: MyString
+  category_type: MyString
+  file_path: MyString
+
+two:
+  keyword: MyString
+  source: MyString
+  name: MyString
+  email: MyString
+  request_type: MyString
+  category_type: MyString
+  file_path: MyString
